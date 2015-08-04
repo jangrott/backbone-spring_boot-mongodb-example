@@ -1,0 +1,3 @@
+rootProject.name = 'backbone-dropwizard-mongodb-example'
+
+include ":lnksmgmt-api", ":lnksmgmt-service"
