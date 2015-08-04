@@ -1,1 +1,1 @@
-# backbone-spring_boot-mongodb-example
+# sample app with backbone.js, spring boot and mongodb
