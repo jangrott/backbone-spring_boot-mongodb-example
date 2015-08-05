@@ -8,14 +8,14 @@ import org.springframework.web.bind.annotation.RestController;
 import java.util.List;
 
 @RestController
-@RequestMapping("/api/link")
+@RequestMapping("/api")
 public class LinkController {
 
     @Autowired
-    private LinkService service;
+    private LinkRepository repository;
 
-    @RequestMapping(method = RequestMethod.GET)
-    public List<Link> getAll() {
-        return service.findAll();
+    @RequestMapping(value = "links", method = RequestMethod.GET)
+    public List<Link> getLinks() {
+        return repository.findAll();
     }
 }

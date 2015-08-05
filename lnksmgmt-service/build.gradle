@@ -1,7 +1,7 @@
 apply plugin: 'spring-boot'
 
 dependencies {
-    compile project(':lnksmgmt-api'),
+    compile project(':lnksmgmt-domain'),
             'org.springframework.boot:spring-boot-starter-web:1.2.5.RELEASE',
             'org.springframework.data:spring-data-rest-core:2.3.2.RELEASE'
 }

@@ -1,0 +1,4 @@
+dependencies {
+    compile 'org.springframework.data:spring-data-mongodb:1.7.2.RELEASE',
+            'org.projectlombok:lombok:1.16.4'
+}
