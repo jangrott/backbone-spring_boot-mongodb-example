@@ -1,0 +1,23 @@
+{
+  "name": "backbone-spring_boot-mongodb-example-app",
+  "version": "1.0.0",
+  "description": "sample app with backbone.js, spring boot and mongodb",
+  "main": "index.html",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/jangrott/backbone-spring_boot-mongodb-example.git"
+  },
+  "author": "TJ",
+  "license": "GPL",
+  "bugs": {
+    "url": "https://github.com/jangrott/backbone-spring_boot-mongodb-example/issues"
+  },
+  "homepage": "https://github.com/jangrott/backbone-spring_boot-mongodb-example",
+  "devDependencies": {
+    "grunt": "^0.4.5",
+    "grunt-contrib-jshint": "^0.11.2"
+  }
+}
