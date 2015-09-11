@@ -6,7 +6,8 @@
     ], function(Backbone, LinkModel) {
 
         var LinkCollection = Backbone.Collection.extend({
-            model: LinkModel
+            model: LinkModel,
+            url: '/api/links'
         });
 
         return LinkCollection;

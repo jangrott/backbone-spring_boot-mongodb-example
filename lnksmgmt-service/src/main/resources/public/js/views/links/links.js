@@ -6,24 +6,24 @@
         'collections/links/links',
         'views/links/linksList',
         'text!templates/links/linksTemplate.html'
-    ], function(Backbone, LinkModel, LinkCollection, LinksListView, linksTemplate) {
+    ], function(Backbone, LinkModel, LinksCollection, LinksListView, linksTemplate) {
 
         var LinksView = Backbone.View.extend({
             el: '#container',
+
+            initialize: function() {
+                this.linksCollection = new LinksCollection();
+            },
 
             render: function() {
                 console.log('list view rendering');
                 this.$el.html(linksTemplate);
 
-                var aLinks = [
-                    new LinkModel({id: '1234', url: 'http://wykop.pl', isWatched: true}),
-                    new LinkModel({id: '9876', url: 'http://onet.pl', isWatched: true})
-                ];
+                this.linksCollection.fetch({success: function(linksCollection) {
+                    var linksListView = new LinksListView({collection: linksCollection});
 
-                var linksCollection = new LinkCollection(aLinks);
-                var linksListView = new LinksListView({collection: linksCollection});
-
-                linksListView.render();
+                    linksListView.render();
+                }});
 
             }
         });
