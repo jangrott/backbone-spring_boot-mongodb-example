@@ -1,11 +1,9 @@
 (function() {
 
     define([
-        'jquery',
-        'underscore',
         'backbone',
         'models/links/link'
-    ], function($, _, Backbone, LinkModel) {
+    ], function(Backbone, LinkModel) {
 
         var LinkCollection = Backbone.Collection.extend({
             model: LinkModel

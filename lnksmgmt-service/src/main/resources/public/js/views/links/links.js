@@ -1,14 +1,12 @@
 (function() {
 
     define([
-        'jquery',
-        'underscore',
         'backbone',
         'models/links/link',
         'collections/links/links',
         'views/links/linksList',
         'text!templates/links/linksTemplate.html'
-    ], function($, _, Backbone, LinkModel, LinkCollection, LinksListView, linksTemplate) {
+    ], function(Backbone, LinkModel, LinkCollection, LinksListView, linksTemplate) {
 
         var LinksView = Backbone.View.extend({
             el: '#container',

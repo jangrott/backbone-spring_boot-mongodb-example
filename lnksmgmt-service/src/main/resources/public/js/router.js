@@ -1,11 +1,9 @@
 (function() {
 
     define([
-        'jquery',
-        'underscore',
         'backbone',
         'views/links/links'
-    ], function($, _, Backbone, LinksView) {
+    ], function(Backbone, LinksView) {
         var AppRouter = Backbone.Router.extend({
             routes: {
                 'links': 'showLinks',

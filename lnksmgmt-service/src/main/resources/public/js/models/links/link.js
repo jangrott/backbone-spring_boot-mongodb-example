@@ -1,9 +1,8 @@
 (function() {
 
     define([
-        'underscore',
         'backbone'
-    ], function(_, Backbone) {
+    ], function(Backbone) {
         var LinkModel = Backbone.Model.extend({});
 
         return LinkModel;
