@@ -6,6 +6,7 @@
             bootstrap: '../bower_components/bootstrap/dist/js/bootstrap',
             underscore: '../bower_components/underscore/underscore',
             backbone: '../bower_components/backbone/backbone',
+            templates: '../templates',
         },
         shim: {
             underscore: {

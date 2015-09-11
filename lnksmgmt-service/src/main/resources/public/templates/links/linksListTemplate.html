@@ -1,0 +1,17 @@
+<table class="table">
+    <tr>
+        <th>ID</th>
+        <th>URL</th>
+        <th>Is watched</th>
+    </tr>
+    <%
+        _.each(links, function(link){
+            var url = link.get("url")
+    %>
+    <tr>
+        <td><%= link.get("id") %></td>
+        <td><a href='<%= url %>' target='_blank'><%= url %></a></td>
+        <td><%= link.get("isWatched") %></td>
+    </tr>
+    <% }); %>
+</table>
