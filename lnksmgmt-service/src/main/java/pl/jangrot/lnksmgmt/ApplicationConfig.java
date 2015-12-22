@@ -6,7 +6,7 @@ import org.springframework.context.annotation.Import;
 
 @Configuration
 @ComponentScan("pl.jangrot.lnksmgmt")
-@Import({ MongoConfig.class})
+@Import({MongoConfig.class})
 public class ApplicationConfig {
 
 }
