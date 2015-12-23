@@ -2,17 +2,8 @@
 
 set -x
 
-#if [ ! -d $OPENSHIFT_DATA_DIR/jdk1.8.0_65 ]
-#  then
-#    cd $OPENSHIFT_DATA_DIR
-#    wget --no-check-certificate --no-cookies --header "Cookie: oraclelicense=accept-securebackup-cookie" http://download.oracle.com/otn-pub/java/jdk/8u65-b17/jdk-8u65-linux-x64.tar.gz
-#    tar xvf *.tar.gz
-#    rm -f *.tar.gz
-#fi
-
 NAVE=$OPENSHIFT_DATA_DIR/nave/nave.sh
 
-# If `nave` doesn't exist we get it from GitHub.
 if [ ! -f $NAVE ]; then
   echo 'Downloading isaacs/nave from GitHub...'
   git clone git://github.com/isaacs/nave.git $OPENSHIFT_DATA_DIR/nave
@@ -30,26 +21,13 @@ if [ ! -d $OPENSHIFT_DATA_DIR/logs ]
     mkdir logs
 fi
 
-#mkdir -p $OPENSHIFT_HOMEDIR/app-root/build-dependencies/.npm
-#export NPM_CONFIG_USERCONFIG=$OPENSHIFT_HOMEDIR/app-root/build-dependencies/.npmrc
-#
-#echo "cache = $OPENSHIFT_HOMEDIR/app-root/build-dependencies/.npm" >> $OPENSHIFT_HOMEDIR/app-root/build-dependencies/.npmrc
-#
-#cd $OPENSHIFT_REPO_DIR/lnksmgmt-service/src/main/resources/public
-#npm install n
-#n stable
-#npm install bower
-#node_modules/.bin/bower install
-
-#cd $OPENSHIFT_REPO_DIR/lnksmgmt-service/src/main/resources/public
-#HOME=$OPENSHIFT_DATA_DIR $NAVE use 0.10.25 npm install
-
+cd $OPENSHIFT_REPO_DIR/lnksmgmt-service/src/main/resources/public
+HOME=$OPENSHIFT_DATA_DIR $NAVE use 0.10.25 npm install --production
+HOME=$OPENSHIFT_DATA_DIR $NAVE use 0.10.25 node_modules/.bin/bower install --config.interactive=false --production
 
 cd $OPENSHIFT_REPO_DIR
 export GRADLE_USER_HOME=$OPENSHIFT_DATA_DIR/gradle
 export GRADLE_HOME=$OPENSHIFT_DATA_DIR/gradle-2.7
-#export JAVA_HOME=$OPENSHIFT_DATA_DIR/jdk1.8.0_65
-#export PATH=$JAVA_HOME/bin:$GRADLE_HOME/bin:$PATH
 export PATH=$GRADLE_HOME/bin:$PATH
 
 gradle bootRepackage
