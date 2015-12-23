@@ -22,8 +22,8 @@ if [ ! -d $OPENSHIFT_DATA_DIR/logs ]
 fi
 
 cd $OPENSHIFT_REPO_DIR/lnksmgmt-service/src/main/resources/public
-HOME=$OPENSHIFT_DATA_DIR $NAVE use 0.10.25 npm install --production
-HOME=$OPENSHIFT_DATA_DIR $NAVE use 0.10.25 node_modules/.bin/bower install --config.interactive=false --production
+HOME=$OPENSHIFT_DATA_DIR SHELL=/bin/bash $NAVE use 0.10.25 npm install --production
+HOME=$OPENSHIFT_DATA_DIR SHELL=/bin/bash $NAVE use 0.10.25 node_modules/.bin/bower install --config.interactive=false --production
 
 cd $OPENSHIFT_REPO_DIR
 export GRADLE_USER_HOME=$OPENSHIFT_DATA_DIR/gradle
