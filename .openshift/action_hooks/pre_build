@@ -4,6 +4,9 @@
 # before the build step.  This script gets executed directly, so it
 # could be python, php, ruby, etc.
 
+source $OPENSHIFT_CARTRIDGE_SDK_BASH
+set -x
+
 NAVE=$OPENSHIFT_DATA_DIR/nave/nave.sh
 
 # If `nave` doesn't exist we get it from GitHub.
