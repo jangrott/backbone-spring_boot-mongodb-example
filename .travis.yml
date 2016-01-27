@@ -1,0 +1,8 @@
+language: java
+
+deploy:
+  provider: openshift
+  user: $OPENSHIFT_USER
+  password: $OPENSHIFT_PASSWORD
+  domain: $OPENSHIFT_DOMAIN
+  app: lnksmgmt
