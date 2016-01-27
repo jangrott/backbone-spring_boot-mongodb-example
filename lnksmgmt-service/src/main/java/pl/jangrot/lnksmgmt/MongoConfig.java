@@ -5,8 +5,10 @@ import com.mongodb.MongoClient;
 import com.mongodb.MongoClientURI;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Bean;
+import org.springframework.context.annotation.Configuration;
 import org.springframework.data.mongodb.config.AbstractMongoConfiguration;
 
+@Configuration
 public class MongoConfig extends AbstractMongoConfiguration {
 
     @Value("${mongodb.db.name}")
