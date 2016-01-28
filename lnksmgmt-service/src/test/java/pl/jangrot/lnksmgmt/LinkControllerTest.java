@@ -1,6 +1,7 @@
 package pl.jangrot.lnksmgmt;
 
 import com.github.fakemongo.junit.FongoRule;
+import org.junit.After;
 import org.junit.Before;
 import org.junit.Rule;
 import org.junit.Test;
@@ -16,7 +17,6 @@ import org.springframework.web.context.WebApplicationContext;
 import java.nio.charset.Charset;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.UUID;
 
 import static org.hamcrest.Matchers.hasSize;
 import static org.hamcrest.core.Is.is;
@@ -44,18 +44,25 @@ public class LinkControllerTest {
             MediaType.APPLICATION_JSON.getSubtype(),
             Charset.forName("utf8"));
 
-    private List<Link> links = new ArrayList<>();
+    private List<Link> links;
 
     @Before
     public void setUp() {
         mockMvc = webAppContextSetup(context).build();
 
+        links = new ArrayList<>();
+
         links.add(repository.save(new Link(randomStringUUID(), "http://siteone.com", false)));
         links.add(repository.save(new Link(randomStringUUID(), "http://sitetwo.com", true)));
     }
 
+    @After
+    public void tearDown() {
+        repository.deleteAll();
+    }
+
     @Test
-    public void readLinks() throws Exception {
+    public void readsLinks() throws Exception {
         mockMvc.perform(get("/api/links"))
                 .andExpect(status().isOk())
                 .andExpect(content().contentType(contentType))
@@ -66,6 +73,16 @@ public class LinkControllerTest {
                 .andExpect(jsonPath("$[1].id", is(links.get(1).getId())))
                 .andExpect(jsonPath("$[1].url", is("http://sitetwo.com")))
                 .andExpect(jsonPath("$[1].watched", is(true)));
+    }
+
+    @Test
+    public void readsSingleLink() throws Exception {
+        mockMvc.perform(get("/api/links/" + links.get(1).getId()))
+                .andExpect(status().isOk())
+                .andExpect(content().contentType(contentType))
+                .andExpect(jsonPath("$.id", is(links.get(1).getId())))
+                .andExpect(jsonPath("$.url", is("http://sitetwo.com")))
+                .andExpect(jsonPath("$.watched", is(true)));
     }
 
 }
