@@ -23,6 +23,7 @@ import static org.hamcrest.core.Is.is;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.*;
 import static org.springframework.test.web.servlet.setup.MockMvcBuilders.webAppContextSetup;
+import static pl.jangrot.lnksmgmt.TestUtils.randomStringUUID;
 
 @RunWith(SpringJUnit4ClassRunner.class)
 @SpringApplicationConfiguration(classes = {TestApplicationConfig.class})
@@ -65,10 +66,6 @@ public class LinkControllerTest {
                 .andExpect(jsonPath("$[1].id", is(links.get(1).getId())))
                 .andExpect(jsonPath("$[1].url", is("http://sitetwo.com")))
                 .andExpect(jsonPath("$[1].watched", is(true)));
-    }
-
-    private String randomStringUUID() {
-        return UUID.randomUUID().toString();
     }
 
 }
