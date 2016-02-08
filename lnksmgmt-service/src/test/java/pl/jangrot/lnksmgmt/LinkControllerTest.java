@@ -21,8 +21,10 @@ import java.util.List;
 import static org.hamcrest.Matchers.hasSize;
 import static org.hamcrest.core.Is.is;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
+import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.*;
 import static org.springframework.test.web.servlet.setup.MockMvcBuilders.webAppContextSetup;
+import static pl.jangrot.lnksmgmt.TestUtils.json;
 import static pl.jangrot.lnksmgmt.TestUtils.randomStringUUID;
 
 @RunWith(SpringJUnit4ClassRunner.class)
@@ -83,6 +85,16 @@ public class LinkControllerTest {
                 .andExpect(jsonPath("$.id", is(links.get(1).getId())))
                 .andExpect(jsonPath("$.url", is("http://sitetwo.com")))
                 .andExpect(jsonPath("$.watched", is(true)));
+    }
+
+    @Test
+    public void createsLink() throws Exception {
+        byte[] linkJson = json(new Link(randomStringUUID(), "http://sitethree.com", false));
+
+        mockMvc.perform(post("/api/links")
+                .contentType(contentType)
+                .content(linkJson))
+                .andExpect(status().isCreated());
     }
 
 }

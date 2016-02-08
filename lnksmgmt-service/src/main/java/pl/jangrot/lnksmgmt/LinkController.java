@@ -1,10 +1,9 @@
 package pl.jangrot.lnksmgmt;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.*;
+import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
 import java.util.List;
 
@@ -23,5 +22,14 @@ public class LinkController {
     @RequestMapping(value = "links/{linkId}", method = RequestMethod.GET)
     public Link getLink(@PathVariable("linkId") String linkId) {
         return repository.findOne(linkId);
+    }
+
+    @RequestMapping(value = "links", method = RequestMethod.POST)
+    public ResponseEntity<Void> createLink(@RequestBody Link link) {
+        Link added = repository.save(link);
+
+        return ResponseEntity.created(ServletUriComponentsBuilder
+                .fromCurrentRequest().path("/{id}")
+                .buildAndExpand(added.getId()).toUri()).build();
     }
 }
