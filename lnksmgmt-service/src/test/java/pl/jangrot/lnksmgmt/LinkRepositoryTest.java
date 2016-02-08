@@ -16,7 +16,7 @@ import java.util.List;
 
 import static org.hamcrest.MatcherAssert.assertThat;
 import static org.hamcrest.Matchers.*;
-import static pl.jangrot.lnksmgmt.TestUtils.randomStringUUID;
+import static pl.jangrot.lnksmgmt.TestUtils.createLink;
 
 @RunWith(SpringJUnit4ClassRunner.class)
 @SpringApplicationConfiguration(classes = {TestApplicationConfig.class})
@@ -35,8 +35,8 @@ public class LinkRepositoryTest {
     public void setUp() {
         links = new ArrayList<>();
 
-        links.add(repository.save(new Link(randomStringUUID(), "http://siteone.pl", false)));
-        links.add(repository.save(new Link(randomStringUUID(), "http://sitetwo.pl", false)));
+        links.add(repository.save(createLink("http://siteone.pl", false)));
+        links.add(repository.save(createLink("http://sitetwo.pl", false)));
     }
 
     @After
@@ -63,7 +63,7 @@ public class LinkRepositoryTest {
 
     @Test
     public void savesLink() {
-        Link siteThree = new Link(randomStringUUID(), "http://sitethree.pl", false);
+        Link siteThree = createLink("http://sitethree.pl", false);
 
         repository.save(siteThree);
 

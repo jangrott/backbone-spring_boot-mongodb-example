@@ -26,6 +26,10 @@ public class LinkController {
 
     @RequestMapping(value = "links", method = RequestMethod.POST)
     public ResponseEntity<Void> createLink(@RequestBody Link link) {
+        if (link.getId() != null) {
+            return ResponseEntity.badRequest().header("Failure", "A new link cannot have an ID").build();
+        }
+
         Link added = repository.save(link);
 
         return ResponseEntity.created(ServletUriComponentsBuilder

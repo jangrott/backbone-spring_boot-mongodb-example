@@ -1,6 +1,7 @@
 package pl.jangrot.lnksmgmt;
 
 import lombok.Getter;
+import lombok.Setter;
 import org.springframework.data.annotation.Id;
 
 import java.util.Objects;
@@ -9,26 +10,16 @@ public final class Link {
 
     @Id
     @Getter
+    @Setter
     private String id;
 
     @Getter
+    @Setter
     private String url;
 
     @Getter
+    @Setter
     private boolean watched;
-
-    public Link() {
-    }
-
-    public Link(String id, String url, boolean watched) {
-        this.id = id;
-        this.url = url;
-        this.watched = watched;
-    }
-
-    public Link(String id, String url) {
-        this(id, url, false);
-    }
 
     @Override
     public String toString() {

@@ -24,8 +24,8 @@ import static org.springframework.test.web.servlet.request.MockMvcRequestBuilder
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.*;
 import static org.springframework.test.web.servlet.setup.MockMvcBuilders.webAppContextSetup;
+import static pl.jangrot.lnksmgmt.TestUtils.createLink;
 import static pl.jangrot.lnksmgmt.TestUtils.json;
-import static pl.jangrot.lnksmgmt.TestUtils.randomStringUUID;
 
 @RunWith(SpringJUnit4ClassRunner.class)
 @SpringApplicationConfiguration(classes = {TestApplicationConfig.class})
@@ -54,8 +54,8 @@ public class LinkControllerTest {
 
         links = new ArrayList<>();
 
-        links.add(repository.save(new Link(randomStringUUID(), "http://siteone.com", false)));
-        links.add(repository.save(new Link(randomStringUUID(), "http://sitetwo.com", true)));
+        links.add(repository.save(createLink("http://siteone.com", false)));
+        links.add(repository.save(createLink("http://sitetwo.com", true)));
     }
 
     @After
@@ -89,12 +89,25 @@ public class LinkControllerTest {
 
     @Test
     public void createsLink() throws Exception {
-        byte[] linkJson = json(new Link(randomStringUUID(), "http://sitethree.com", false));
+        Link siteThree = new Link();
+        siteThree.setUrl("http://sitethree.com");
+
+        byte[] linkJson = json(siteThree);
 
         mockMvc.perform(post("/api/links")
                 .contentType(contentType)
                 .content(linkJson))
                 .andExpect(status().isCreated());
+    }
+
+    @Test
+    public void doesNotCreateLinkWhenIDSetUp() throws Exception {
+        byte[] linkJson = json(createLink("http://sitefour.com", false));
+
+        mockMvc.perform(post("/api/links")
+                .contentType(contentType)
+                .content(linkJson))
+                .andExpect(status().isBadRequest());
     }
 
 }
