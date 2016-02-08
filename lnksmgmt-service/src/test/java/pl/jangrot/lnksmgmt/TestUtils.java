@@ -6,8 +6,6 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 
 import java.util.UUID;
 
-import static pl.jangrot.lnksmgmt.Utils.randomStringUUID;
-
 public final class TestUtils {
 
     private TestUtils() {
@@ -21,7 +19,6 @@ public final class TestUtils {
 
     public static Link createLink(String url, boolean watched) {
         Link link = new Link();
-        link.setId(randomStringUUID());
         link.setUrl(url);
         link.setWatched(watched);
         return link;

@@ -17,6 +17,7 @@ import org.springframework.web.context.WebApplicationContext;
 import java.nio.charset.Charset;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.UUID;
 
 import static org.hamcrest.Matchers.hasSize;
 import static org.hamcrest.core.Is.is;
@@ -102,7 +103,11 @@ public class LinkControllerTest {
 
     @Test
     public void doesNotCreateLinkWhenIDSetUp() throws Exception {
-        byte[] linkJson = json(createLink("http://sitefour.com", false));
+        Link linkWithId = new Link();
+        linkWithId.setId(UUID.randomUUID().toString());
+        linkWithId.setUrl("http://sitefour.com");
+
+        byte[] linkJson = json(linkWithId);
 
         mockMvc.perform(post("/api/links")
                 .contentType(contentType)
