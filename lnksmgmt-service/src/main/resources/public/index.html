@@ -16,12 +16,43 @@
     <script src="bower_components/html5shiv/dist/html5shiv.min.js"></script>
     <script src="bower_components/respond/dist/respond.min.js"></script>
     <![endif]-->
+    <style>
+        /* Sticky footer styles */
+        html {
+            position: relative;
+            min-height: 100%;
+        }
+        body {
+            /* Margin bottom by footer height */
+            margin-bottom: 60px;
+        }
+        .footer {
+            position: absolute;
+            bottom: 0;
+            width: 100%;
+            /* Set the fixed height of the footer here */
+            height: 45px;
+            background-color: #f5f5f5;
+            text-align:right;
+            padding-top: 12px;
+        }
+    </style>
 </head>
 <body>
-    <div id="main">
+<div class="container">
+    <div class="page-header">
         <h1>Links Management</h1>
-        <div id="container"></div>
+        <p class="lead">The place to manage your urls</p>
     </div>
+
+    <div id="content"></div>
+</div>
+
+<footer class="footer">
+    <div class="container">
+        <p class="text-muted">&copy; 2016 LnksMgmt</p>
+    </div>
+</footer>
 
 <script data-main="js/config" src="bower_components/requirejs/require.js"></script>
 </body>

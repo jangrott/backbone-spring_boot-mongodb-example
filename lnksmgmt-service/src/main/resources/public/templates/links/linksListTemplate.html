@@ -1,17 +1,19 @@
 <table class="table">
     <tr>
-        <th>ID</th>
-        <th>URL</th>
-        <th>Is watched</th>
+        <th class="col-md-10">URL</th>
+        <th class="col-md-1 text-center">Watched</th>
+        <th class="col-md-1 text-center">&nbsp;</th>
     </tr>
     <%
         _.each(links, function(link){
+            var id = link.get("id")
             var url = link.get("url")
+            var isWatched = link.get("watched")
     %>
     <tr>
-        <td><%= link.get("id") %></td>
-        <td><a href='<%= url %>' target='_blank'><%= url %></a></td>
-        <td><%= link.get("watched") %></td>
+        <td class="col-md-10"><a href='<%= url %>' target='_blank'><%= url %></a></td>
+        <td class="col-md-1 text-center"><img src="res/<%= isWatched ? 'tick' : 'sub' %>.png" alt="is watched?" /></td>
+        <td class="col-md-1 text-center"><img src="res/cross.png" alt="delete url" /></td>
     </tr>
     <% }); %>
 </table>

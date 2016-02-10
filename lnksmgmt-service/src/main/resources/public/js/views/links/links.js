@@ -9,7 +9,7 @@
     ], function(Backbone, LinkModel, LinksCollection, LinksListView, linksTemplate) {
 
         var LinksView = Backbone.View.extend({
-            el: '#container',
+            el: '#content',
 
             initialize: function() {
                 this.linksCollection = new LinksCollection();
