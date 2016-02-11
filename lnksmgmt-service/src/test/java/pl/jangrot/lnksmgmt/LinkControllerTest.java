@@ -117,10 +117,23 @@ public class LinkControllerTest {
 
     @Test
     public void doesNotCreateLinkWhenUrlEmpty() throws Exception {
-        Link linkWithId = new Link();
-        linkWithId.setId(UUID.randomUUID().toString());
+        Link link = new Link();
+        link.setUrl("");
 
-        byte[] linkJson = json(linkWithId);
+        byte[] linkJson = json(link);
+
+        mockMvc.perform(post("/api/links")
+                .contentType(contentType)
+                .content(linkJson))
+                .andExpect(status().isBadRequest());
+    }
+
+    @Test
+    public void doesNotCreateLinkWhenUrlNotValid() throws Exception {
+        Link link = new Link();
+        link.setUrl("http:not,valid.link");
+
+        byte[] linkJson = json(link);
 
         mockMvc.perform(post("/api/links")
                 .contentType(contentType)

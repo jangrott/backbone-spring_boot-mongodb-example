@@ -1,5 +1,6 @@
 package pl.jangrot.lnksmgmt;
 
+import org.apache.commons.validator.routines.UrlValidator;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -13,6 +14,7 @@ public class LinkController {
 
     @Autowired
     private LinkRepository repository;
+    private UrlValidator urlValidator = new UrlValidator();
 
     @RequestMapping(value = "links", method = RequestMethod.GET)
     public List<Link> getLinks() {
@@ -30,7 +32,7 @@ public class LinkController {
             return ResponseEntity.badRequest().header("Failure", "A new link cannot have an ID").build();
         }
 
-        if (link == null || link.getUrl().isEmpty()) {
+        if (isNotValidUrl(link.getUrl())) {
             return ResponseEntity.badRequest().header("Failure", "A new link cannot have an empty URL").build();
         }
 
@@ -39,5 +41,9 @@ public class LinkController {
         return ResponseEntity.created(ServletUriComponentsBuilder
                 .fromCurrentRequest().path("/{id}")
                 .buildAndExpand(added.getId()).toUri()).build();
+    }
+
+    private boolean isNotValidUrl(String url) {
+        return !urlValidator.isValid(url);
     }
 }
