@@ -43,6 +43,11 @@ public class LinkController {
                 .buildAndExpand(added.getId()).toUri()).build();
     }
 
+    @RequestMapping(value = "links/{linkId}", method = RequestMethod.DELETE)
+    public void deleteLink(@PathVariable("linkId") String linkId) {
+        repository.delete(linkId);
+    }
+
     private boolean isNotValidUrl(String url) {
         return !urlValidator.isValid(url);
     }

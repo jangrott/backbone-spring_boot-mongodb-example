@@ -21,6 +21,7 @@ import java.util.UUID;
 
 import static org.hamcrest.Matchers.hasSize;
 import static org.hamcrest.core.Is.is;
+import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.delete;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.*;
@@ -139,6 +140,11 @@ public class LinkControllerTest {
                 .contentType(contentType)
                 .content(linkJson))
                 .andExpect(status().isBadRequest());
+    }
+
+    @Test
+    public void deletesLink() throws Exception {
+        mockMvc.perform(delete("/api/links/" + links.get(1).getId())).andExpect(status().isOk());
     }
 
 }
