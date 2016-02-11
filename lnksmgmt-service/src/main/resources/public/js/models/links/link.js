@@ -7,7 +7,7 @@
             urlRoot: '/api/links',
 
             validate: function(attr) {
-                if (!attr.url || attr.url == '') {
+                if (!attr.url || attr.url === '') {
                     return 'Url cannot be empty!';
                 }
             }
