@@ -16,7 +16,8 @@
             },
 
             events: {
-                'submit': 'addUrl'
+                'submit': 'addUrl',
+                'click .delUrlBtn': 'deleteUrl'
             },
 
             addUrl: function(e) {
@@ -32,6 +33,14 @@
                     this.render();
                 }
 
+            },
+
+            deleteUrl: function(e) {
+                var linkId = $(e.currentTarget).attr('id');
+                var link = this.linksCollection.get(linkId);
+                this.linksCollection.remove(link).destroy();
+
+                this.render();
             },
 
             render: function() {
