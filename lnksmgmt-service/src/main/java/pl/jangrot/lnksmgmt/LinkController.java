@@ -30,6 +30,10 @@ public class LinkController {
             return ResponseEntity.badRequest().header("Failure", "A new link cannot have an ID").build();
         }
 
+        if (link == null || link.getUrl().isEmpty()) {
+            return ResponseEntity.badRequest().header("Failure", "A new link cannot have an empty URL").build();
+        }
+
         Link added = repository.save(link);
 
         return ResponseEntity.created(ServletUriComponentsBuilder

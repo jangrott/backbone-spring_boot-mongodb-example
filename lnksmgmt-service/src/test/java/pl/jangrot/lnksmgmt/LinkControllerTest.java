@@ -115,4 +115,17 @@ public class LinkControllerTest {
                 .andExpect(status().isBadRequest());
     }
 
+    @Test
+    public void doesNotCreateLinkWhenUrlEmpty() throws Exception {
+        Link linkWithId = new Link();
+        linkWithId.setId(UUID.randomUUID().toString());
+
+        byte[] linkJson = json(linkWithId);
+
+        mockMvc.perform(post("/api/links")
+                .contentType(contentType)
+                .content(linkJson))
+                .andExpect(status().isBadRequest());
+    }
+
 }

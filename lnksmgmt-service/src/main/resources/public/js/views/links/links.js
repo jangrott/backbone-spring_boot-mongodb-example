@@ -15,6 +15,25 @@
                 this.linksCollection = new LinksCollection();
             },
 
+            events: {
+                'submit': 'addUrl'
+            },
+
+            addUrl: function(e) {
+                e.preventDefault();
+                var urlValue = $(e.currentTarget).find('input[type=url]').val();
+
+                var link = new LinkModel({url: urlValue, watched: false});
+
+                if (link.isValid()) {
+                    link.save();
+                    this.linksCollection.add(link);
+
+                    this.render();
+                }
+
+            },
+
             render: function() {
                 console.log('list view rendering');
                 this.$el.html(linksTemplate);
@@ -24,7 +43,6 @@
 
                     linksListView.render();
                 }});
-
             }
         });
 
