@@ -147,7 +147,7 @@ public class LinkControllerTest {
 
         byte[] linkJson = json(siteOne);
 
-        mockMvc.perform(put("/api/links")
+        mockMvc.perform(put("/api/links/" + siteOne.getId())
                 .contentType(contentType)
                 .content(linkJson))
                 .andExpect(status().isOk());
@@ -159,7 +159,7 @@ public class LinkControllerTest {
 
         byte[] linkJson = json(siteOne);
 
-        mockMvc.perform(put("/api/links")
+        mockMvc.perform(put("/api/links/dummy")
                 .contentType(contentType)
                 .content(linkJson))
                 .andExpect(status().isCreated());
@@ -172,7 +172,7 @@ public class LinkControllerTest {
 
         byte[] linkJson = json(link);
 
-        mockMvc.perform(put("/api/links")
+        mockMvc.perform(put("/api/links/" + link.getId())
                 .contentType(contentType)
                 .content(linkJson))
                 .andExpect(status().isBadRequest());

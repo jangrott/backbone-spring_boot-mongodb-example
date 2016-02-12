@@ -11,7 +11,7 @@
             var isWatched = link.get("watched")
     %>
     <tr>
-        <td class="col-md-10"><a href='<%= url %>' target='_blank'><%= url %></a></td>
+        <td class="col-md-10"><a id="<%= id %>" class="goToUrlBtn"><%= url %></a></td>
         <td class="col-md-1 text-center"><img src="res/<%= isWatched ? 'tick' : 'sub' %>.png" alt="is watched?" /></td>
         <td class="col-md-1 text-center"><img id="<%= id %>" class="delUrlBtn" src="res/cross.png" alt="delete url" /></td>
     </tr>

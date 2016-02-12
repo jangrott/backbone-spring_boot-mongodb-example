@@ -43,8 +43,8 @@ public class LinkController {
                 .buildAndExpand(added.getId()).toUri()).build();
     }
 
-    @RequestMapping(value = "links", method = RequestMethod.PUT)
-    public ResponseEntity<Void> updatesLink(@RequestBody Link link) {
+    @RequestMapping(value = "links/{linkId}", method = RequestMethod.PUT)
+    public ResponseEntity<Void> updatesLink(@PathVariable("linkId") String linkId, @RequestBody Link link) {
         if (link.getId() == null) {
             return createLink(link);
         }

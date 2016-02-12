@@ -13,11 +13,14 @@
 
             initialize: function() {
                 this.linksCollection = new LinksCollection();
+
+                this.listenTo(this.linksCollection, 'reset', this.render);
             },
 
             events: {
                 'submit': 'addUrl',
-                'click .delUrlBtn': 'deleteUrl'
+                'click .delUrlBtn': 'deleteUrl',
+                'click .goToUrlBtn': 'goToUrl'
             },
 
             addUrl: function(e) {
@@ -41,6 +44,17 @@
                 this.linksCollection.remove(link).destroy();
 
                 this.render();
+            },
+
+            goToUrl: function(e) {
+                var linkId = $(e.currentTarget).attr('id');
+                var link = this.linksCollection.get(linkId);
+                link.set('watched', true);
+                link.save();
+
+                window.open(link.get('url'), '_blank');
+
+                this.linksCollection.reset();
             },
 
             render: function() {
