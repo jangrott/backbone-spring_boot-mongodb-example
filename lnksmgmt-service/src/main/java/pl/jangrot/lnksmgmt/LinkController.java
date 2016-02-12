@@ -43,6 +43,21 @@ public class LinkController {
                 .buildAndExpand(added.getId()).toUri()).build();
     }
 
+    @RequestMapping(value = "links", method = RequestMethod.PUT)
+    public ResponseEntity<Void> updatesLink(@RequestBody Link link) {
+        if (link.getId() == null) {
+            return createLink(link);
+        }
+
+        if (isNotValidUrl(link.getUrl())) {
+            return ResponseEntity.badRequest().header("Failure", "A new link cannot have an empty URL").build();
+        }
+
+        repository.save(link);
+
+        return ResponseEntity.ok().build();
+    }
+
     @RequestMapping(value = "links/{linkId}", method = RequestMethod.DELETE)
     public void deleteLink(@PathVariable("linkId") String linkId) {
         repository.delete(linkId);
