@@ -31,9 +31,8 @@
 
                 if (link.isValid()) {
                     link.save();
-                    this.linksCollection.add(link);
 
-                    this.render();
+                    this.linksCollection.reset();
                 }
 
             },
@@ -41,9 +40,9 @@
             deleteUrl: function(e) {
                 var linkId = $(e.currentTarget).attr('id');
                 var link = this.linksCollection.get(linkId);
-                this.linksCollection.remove(link).destroy();
+                link.destroy();
 
-                this.render();
+                this.linksCollection.reset();
             },
 
             goToUrl: function(e) {
