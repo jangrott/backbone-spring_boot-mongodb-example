@@ -1,9 +1,7 @@
 package pl.jangrot.lnksmgmt;
 
-import com.github.fakemongo.junit.FongoRule;
 import org.junit.After;
 import org.junit.Before;
-import org.junit.Rule;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -26,9 +24,6 @@ public class LinkRepositoryTest {
     @Autowired
     private LinkRepository repository;
 
-    @Rule
-    public FongoRule fongoRule = new FongoRule();
-
     private List<Link> links;
 
     @Before
@@ -49,7 +44,6 @@ public class LinkRepositoryTest {
         List<Link> links = repository.findAll();
 
         assertThat(links, hasSize(2));
-
     }
 
     @Test
