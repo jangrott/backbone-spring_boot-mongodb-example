@@ -111,9 +111,9 @@ public class LinkControllerTest {
     }
 
     @Test
-    public void doesNotCreateLinkWhenUrlEmpty() throws Exception {
+    public void doesNotCreateLinkWhenUrlNotSetUp() throws Exception {
         Link link = new Link();
-        link.setUrl("");
+        link.setUrl(null);
 
         byte[] linkJson = json(link);
 
@@ -124,9 +124,9 @@ public class LinkControllerTest {
     }
 
     @Test
-    public void doesNotCreateLinkWhenUrlNotValid() throws Exception {
+    public void doesNotCreateLinkWhenUrlBlank() throws Exception {
         Link link = new Link();
-        link.setUrl("http:not,valid.link");
+        link.setUrl("  ");
 
         byte[] linkJson = json(link);
 
@@ -166,9 +166,22 @@ public class LinkControllerTest {
     }
 
     @Test
-    public void doesNotUpdateLinkWhenUrlNotValid() throws Exception {
+    public void doesNotUpdateLinkWhenUrlBlank() throws Exception {
         Link link = new Link();
-        link.setUrl("http:not,valid.link");
+        link.setUrl("");
+
+        byte[] linkJson = json(link);
+
+        mockMvc.perform(put("/api/links/" + link.getId())
+                .contentType(contentType)
+                .content(linkJson))
+                .andExpect(status().isBadRequest());
+    }
+
+    @Test
+    public void doesNotUpdateLinkWhenUrlNotSetUp() throws Exception {
+        Link link = new Link();
+        link.setUrl(null);
 
         byte[] linkJson = json(link);
 

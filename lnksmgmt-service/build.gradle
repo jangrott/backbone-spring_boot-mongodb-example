@@ -2,7 +2,6 @@ apply plugin: 'spring-boot'
 
 dependencies {
     compile project(':lnksmgmt-domain'),
-            'commons-validator:commons-validator:1.4.1',
             'org.springframework.boot:spring-boot-starter-parent:1.2.5.RELEASE',
             'org.springframework.boot:spring-boot-starter-web:1.2.3.RELEASE',
             'org.springframework.boot:spring-boot-starter-data-rest:1.2.3.RELEASE'
